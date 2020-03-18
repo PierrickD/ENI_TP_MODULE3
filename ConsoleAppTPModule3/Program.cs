@@ -69,18 +69,12 @@ namespace ConsoleAppTPModule3
             Dictionary<Auteur, int> monDico = new Dictionary<Auteur, int>();
             foreach (var auteur in ListeAuteurs)
             {
-                try
-                {
-                    monDico.Add(auteur, ListeLivres.GroupBy(livre => livre.Auteur).Count());
-                }
-                catch (ArgumentException)
-                {
-                    monDico.Add(auteur, 0);
-                }
-                
+                monDico.Add(auteur, ListeLivres.GroupBy(livre => livre.Auteur).Count());
             }
             Console.WriteLine($"Question 9 (solution 2) : {monDico.OrderBy(dico => dico.Value).Last().Key.Nom}");
 
+            //Autre solution
+            Console.WriteLine($"Question 9 (solution 3) : {ListeAuteurs.OrderBy(auteur => ListeLivres.Count(livre => livre.Auteur == auteur)).FirstOrDefault().Nom}");
 
 
             Console.ReadKey();
